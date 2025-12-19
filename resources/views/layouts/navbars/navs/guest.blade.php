@@ -27,37 +27,51 @@
             </div>
             <!-- Navbar items -->
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('home') }}">
-                        <i class="ni ni-planet"></i>
-                        <span class="nav-link-inner--text">{{ __('Dashboard') }}</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('register') }}">
-                        <i class="ni ni-circle-08"></i>
-                        <span class="nav-link-inner--text">{{ __('Register') }}</span>
-                    </a>
-                </li>
-                @if (Route::has('profile.edit'))
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('profile.edit') }}">
-                        <i class="ni ni-single-02"></i>
-                        <span class="nav-link-inner--text">{{ __('Profile') }}</span>
-                    </a>
-                </li>
-                @endif
-                @if (Route::has('login'))
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('login') }}">
-                        <i class="ni ni-key-25"></i>
-                        <span class="nav-link-inner--text">{{ __('Login') }}</span>
-                    </a>
-                </li>
-                @endif
-
-                </a>
-                </li>
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-icon" href="{{ route('guest.dashboard') }}">
+                            <i class="ni ni-tv-2"></i>
+                            <span class="nav-link-inner--text">{{ __('Dashboard') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-icon" href="{{ route('guest.rooms.index') }}">
+                            <i class="ni ni-building"></i>
+                            <span class="nav-link-inner--text">{{ __('Ruangan') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-icon" href="{{ route('guest.bookings.index') }}">
+                            <i class="ni ni-calendar-grid-58"></i>
+                            <span class="nav-link-inner--text">{{ __('Booking Saya') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-icon" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="ni ni-user-run"></i>
+                            <span class="nav-link-inner--text">{{ __('Logout') }}</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-icon" href="{{ route('guest.rooms.index') }}">
+                            <i class="ni ni-building"></i>
+                            <span class="nav-link-inner--text">{{ __('Ruangan') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-icon" href="{{ route('register') }}">
+                            <i class="ni ni-circle-08"></i>
+                            <span class="nav-link-inner--text">{{ __('Register') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-icon" href="{{ route('login') }}">
+                            <i class="ni ni-key-25"></i>
+                            <span class="nav-link-inner--text">{{ __('Login') }}</span>
+                        </a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>
