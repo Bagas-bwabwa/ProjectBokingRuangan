@@ -67,7 +67,8 @@ class LoginController extends Controller
             } elseif ($user->isStaff()) {
                 return redirect()->intended(route('staff.dashboard'));
             } else {
-                return redirect()->intended(route('guest.dashboard'));
+                // Guest user diarahkan ke halaman daftar ruangan setelah login
+                return redirect()->intended(route('guest.rooms.index'));
             }
         }
 

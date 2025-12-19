@@ -12,17 +12,26 @@
     <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
 </head>
-<body class="bg-default">
+<body class="{{ auth()->check() ? '' : 'bg-default' }}">
     @auth
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
+        @include('layouts.partials.guest-sidebar')
+        
+        <div class="main-content">
+            @include('layouts.navbars.navbar')
+            @include('layouts.partials.alerts')
+            <div class="container-fluid mt--7">
+                @yield('content')
+            </div>
+        </div>
+    @else
+        @include('layouts.navbars.navs.guest')
+        @include('layouts.partials.alerts')
+        @yield('content')
+        @include('layouts.footers.guest')
     @endauth
-    
-    @include('layouts.navbars.navs.guest')
-    @include('layouts.partials.alerts')
-    @yield('content')
-    @include('layouts.footers.guest')
 
     <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

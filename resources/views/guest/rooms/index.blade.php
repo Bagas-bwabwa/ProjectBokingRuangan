@@ -1,14 +1,22 @@
 @extends('layouts.guest')
 
 @section('content')
-<div class="container mt--7">
-    <div class="row">
-        <div class="col">
-            <div class="card shadow">
-                <div class="card-header border-0">
-                    <h3 class="mb-0">Daftar Ruangan</h3>
+<div class="row">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-header border-0">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="mb-0">Daftar Ruangan Tersedia</h3>
+                    </div>
+                    @auth
+                    <div class="col-auto">
+                        <a href="{{ route('guest.dashboard') }}" class="btn btn-sm btn-primary">Dashboard Saya</a>
+                    </div>
+                    @endauth
                 </div>
-                <div class="card-body">
+            </div>
+            <div class="card-body">
                     <!-- Search & Filter Form -->
                     <form method="GET" action="{{ route('guest.rooms.index') }}" class="mb-4">
                         <div class="row">
@@ -68,6 +76,5 @@
             </div>
         </div>
     </div>
-</div>
 @endsection
 
