@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
-<div class="container mt--7 mb-5">
+<div class="container mt-4 mb-5">
     <!-- Statistics Cards -->
     <div class="row mb-4">
         <div class="col-xl-3 col-md-6 mb-4">

@@ -68,6 +68,14 @@
                     </a>
                 </li>
             </ul>
+            <hr class="my-3">
+            <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="ni ni-user-run text-danger"></i> Logout
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

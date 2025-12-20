@@ -78,8 +78,18 @@ Route::prefix('staff')->name('staff.')->middleware(['auth', 'role:staff'])->grou
     })->name('dashboard');
 
     // Bookings (card view)
-    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
-    Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
+    Route::get('/bookings', function () {
+        $bookings = \App\Models\Booking::with(['user', 'room'])
+            ->orderBy('tanggal', 'desc')
+            ->orderBy('jam_mulai', 'desc')
+            ->paginate(10);
+        return view('staff.bookings.index', compact('bookings'));
+    })->name('bookings.index');
+    
+    Route::get('/bookings/{booking}', function (\App\Models\Booking $booking) {
+        return view('staff.bookings.show', compact('booking'));
+    })->name('bookings.show');
+    
     Route::post('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('bookings.approve');
     Route::post('/bookings/{booking}/reject', [BookingController::class, 'reject'])->name('bookings.reject');
 });

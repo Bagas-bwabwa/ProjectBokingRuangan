@@ -1,0 +1,13 @@
+/* Fix navbar overlap issue */
+.main-content {
+    padding-top: 70px;
+}
+
+.main-content .container-fluid {
+    padding-top: 20px;
+}
+
+.navbar-top {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+    background-color: #fff !important;
+}

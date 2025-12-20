@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
-<div class="container-fluid mt--7">
+<div class="container-fluid mt-5">
     <div class="row">
         <div class="col-md-8">
             <div class="card shadow">
