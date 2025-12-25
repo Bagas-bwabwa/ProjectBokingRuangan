@@ -52,6 +52,7 @@
                                     <th scope="col">No</th>
                                     <th scope="col">Foto</th>
                                     <th scope="col">Nama Ruangan</th>
+                                    <th scope="col">Jumlah</th>
                                     <th scope="col">Kategori</th>
                                     <th scope="col">Kapasitas</th>
                                     <th scope="col">Status</th>
@@ -70,6 +71,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $room->nama_ruangan }}</td>
+                                    <td>{{ $room->jumlah_ruangan ?? 1 }}</td>
                                     <td>{{ $room->category->nama_kategori }}</td>
                                     <td>{{ $room->kapasitas }} orang</td>
                                     <td>
@@ -93,7 +95,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">Tidak ada data</td>
+                                    <td colspan="8" class="text-center">Tidak ada data</td>
                                 </tr>
                                 @endforelse
                             </tbody>

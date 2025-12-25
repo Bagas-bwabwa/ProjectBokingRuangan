@@ -24,6 +24,7 @@ class UpdateCategoryRequest extends FormRequest
         $categoryId = $this->route('category')->id ?? $this->route('category');
         return [
             'nama_kategori' => 'required|string|max:255|unique:categories,nama_kategori,' . $categoryId,
+            'jumlah_ruangan' => 'required|integer|min:0',
             'deskripsi' => 'nullable|string',
         ];
     }

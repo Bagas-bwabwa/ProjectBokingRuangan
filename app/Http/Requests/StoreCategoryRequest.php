@@ -22,8 +22,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_kategori' => 'required|string|max:255|unique:categories,nama_kategori',
-            'deskripsi' => 'nullable|string',
+            'nama_kategori' => 'required|string|max:255|unique:categories,nama_kategori',            'jumlah_ruangan' => 'required|integer|min:0',            'deskripsi' => 'nullable|string',
         ];
     }
 }

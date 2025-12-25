@@ -23,6 +23,7 @@ class StoreRoomRequest extends FormRequest
     {
         return [
             'nama_ruangan' => 'required|string|max:255',
+            'jumlah_ruangan' => 'required|integer|min:1',
             'kapasitas' => 'required|integer|min:1',
             'category_id' => 'required|exists:categories,id',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

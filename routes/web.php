@@ -42,11 +42,25 @@ Route::post('/register', [RegisterController::class, 'register']);
 // Admin routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', function () {
+        $today = now()->toDateString();
+        
         $stats = [
+            // Statistik Dasar
             'total_rooms' => \App\Models\Room::count(),
             'total_bookings' => \App\Models\Booking::count(),
             'pending_bookings' => \App\Models\Booking::where('status', 'pending')->count(),
-            'total_users' => \App\Models\User::whereIn('role', ['admin', 'staff'])->count(),
+            'total_users' => \App\Models\User::where('role', 'user')->count(),
+            
+            // Statistik Aktivitas Pengguna
+            'bookings_today' => \App\Models\Booking::whereDate('created_at', $today)->count(),
+            'approved_bookings' => \App\Models\Booking::where('status', 'approved')->count(),
+            'rejected_bookings' => \App\Models\Booking::where('status', 'rejected')->count(),
+            'completed_bookings' => \App\Models\Booking::where('status', 'completed')->count(),
+            
+            // Approval Rate
+            'approval_rate' => \App\Models\Booking::count() > 0 
+                ? round((\App\Models\Booking::where('status', 'approved')->count() / \App\Models\Booking::count()) * 100, 2)
+                : 0,
         ];
         return view('admin.dashboard', compact('stats'));
     })->name('dashboard');

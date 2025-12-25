@@ -20,6 +20,13 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="jumlah_ruangan">Jumlah Ruangan</label>
+                            <input type="number" class="form-control @error('jumlah_ruangan') is-invalid @enderror" id="jumlah_ruangan" name="jumlah_ruangan" value="{{ old('jumlah_ruangan', $room->jumlah_ruangan ?? 1) }}" min="1" required>
+                            @error('jumlah_ruangan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="kapasitas">Kapasitas</label>
                             <input type="number" class="form-control @error('kapasitas') is-invalid @enderror" id="kapasitas" name="kapasitas" value="{{ old('kapasitas', $room->kapasitas) }}" min="1" required>
                             @error('kapasitas')

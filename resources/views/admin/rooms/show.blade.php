@@ -21,6 +21,8 @@
                             <dl class="row">
                                 <dt class="col-sm-4">Nama Ruangan</dt>
                                 <dd class="col-sm-8">{{ $room->nama_ruangan }}</dd>
+                                <dt class="col-sm-4">Jumlah Ruangan</dt>
+                                <dd class="col-sm-8">{{ $room->jumlah_ruangan ?? 1 }}</dd>
                                 <dt class="col-sm-4">Kategori</dt>
                                 <dd class="col-sm-8">{{ $room->category->nama_kategori }}</dd>
                                 <dt class="col-sm-4">Kapasitas</dt>

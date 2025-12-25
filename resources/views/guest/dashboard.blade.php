@@ -168,7 +168,16 @@
                             </table>
                         </div>
                         <div class="card-footer py-4">
-                            {{ $bookings->links() }}
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <p class="text-sm text-muted mb-0">
+                                        Menampilkan {{ $bookings->firstItem() }} hingga {{ $bookings->lastItem() }} dari {{ $bookings->total() }} booking
+                                    </p>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    {{ $bookings->links('pagination::bootstrap-4') }}
+                                </div>
+                            </div>
                         </div>
                     @else
                         <div class="alert alert-info text-center">
