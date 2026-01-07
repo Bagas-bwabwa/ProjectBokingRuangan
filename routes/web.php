@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StaffController;
 
 // Public routes
 Route::get('/', function () {
@@ -75,6 +77,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::resource('bookings', BookingController::class);
     Route::post('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('bookings.approve');
     Route::post('/bookings/{booking}/reject', [BookingController::class, 'reject'])->name('bookings.reject');
+    Route::get('/bookings/{booking}/download-document', [BookingController::class, 'downloadDocument'])->name('bookings.download-document');
 
     // Users (Admin & Staff)
     Route::resource('users', UserController::class);
@@ -92,9 +95,20 @@ Route::prefix('staff')->name('staff.')->middleware(['auth', 'role:staff'])->grou
     })->name('dashboard');
 
     // Bookings (card view)
-    Route::get('/bookings', function () {
-        $bookings = \App\Models\Booking::with(['user', 'room'])
-            ->orderBy('tanggal', 'desc')
+    Route::get('/bookings', function (Request $request) {
+        $query = \App\Models\Booking::with(['user', 'room']);
+
+        // Filter by status
+        if ($request->has('status') && $request->get('status') != '') {
+            $query->where('status', $request->get('status'));
+        }
+
+        // Filter by date
+        if ($request->has('tanggal') && $request->get('tanggal') != '') {
+            $query->whereDate('tanggal', $request->get('tanggal'));
+        }
+
+        $bookings = $query->orderBy('tanggal', 'desc')
             ->orderBy('jam_mulai', 'desc')
             ->paginate(10);
         return view('staff.bookings.index', compact('bookings'));
@@ -106,6 +120,17 @@ Route::prefix('staff')->name('staff.')->middleware(['auth', 'role:staff'])->grou
     
     Route::post('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('bookings.approve');
     Route::post('/bookings/{booking}/reject', [BookingController::class, 'reject'])->name('bookings.reject');
+    Route::get('/bookings/{booking}/download-document', [BookingController::class, 'downloadDocument'])->name('bookings.download-document');
+
+    // Reports routes
+    Route::prefix('reports')->name('reports.')->group(function () {
+        Route::get('/statistics', [StaffController::class, 'statisticsDashboard'])->name('statistics');
+        Route::get('/daily', [StaffController::class, 'dailyReport'])->name('daily');
+        Route::get('/monthly', [StaffController::class, 'monthlyReport'])->name('monthly');
+        Route::get('/occupancy', [StaffController::class, 'roomOccupancyReport'])->name('occupancy');
+        Route::get('/approval', [StaffController::class, 'approvalRateReport'])->name('approval');
+        Route::get('/top-users', [StaffController::class, 'topUsersReport'])->name('top-users');
+    });
 });
 
 // Profile routes (accessible by all authenticated users)

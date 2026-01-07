@@ -94,8 +94,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer py-4">
-                        {{ $bookings->links() }}
+                    <div class="card-footer py-4 d-flex justify-content-center">
+                        {{ $bookings->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

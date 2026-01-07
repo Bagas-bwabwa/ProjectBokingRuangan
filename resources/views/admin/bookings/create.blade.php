@@ -58,6 +58,14 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="dokumen">Dokumen Pendukung (Opsional)</label>
+                            <input type="file" class="form-control @error('dokumen') is-invalid @enderror" id="dokumen" name="dokumen" accept=".pdf,.doc,.docx">
+                            @error('dokumen')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <small class="form-text text-muted">Format: PDF, DOC, DOCX (Max: 5MB)</small>
+                        </div>
+                        <div class="form-group">
                             <a href="{{ route('admin.bookings.index') }}" class="btn btn-secondary">Batal</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>

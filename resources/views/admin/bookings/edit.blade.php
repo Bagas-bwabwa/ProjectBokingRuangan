@@ -70,6 +70,25 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        @if($booking->dokumen)
+                        <div class="form-group">
+                            <label>Dokumen Pendukung Saat Ini</label>
+                            <div class="alert alert-info mb-2">
+                                <i class="fas fa-file-pdf"></i> Dokumen tersedia
+                                <a href="{{ route('admin.bookings.download-document', $booking) }}" class="btn btn-sm btn-primary ml-2">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="form-group">
+                            <label for="dokumen">Ganti Dokumen (Opsional)</label>
+                            <input type="file" class="form-control @error('dokumen') is-invalid @enderror" id="dokumen" name="dokumen" accept=".pdf,.doc,.docx">
+                            @error('dokumen')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <small class="form-text text-muted">Format: PDF, DOC, DOCX (Max: 5MB)</small>
+                        </div>
                         <div class="form-group">
                             <label for="catatan">Catatan</label>
                             <textarea class="form-control @error('catatan') is-invalid @enderror" id="catatan" name="catatan" rows="3">{{ old('catatan', $booking->catatan) }}</textarea>

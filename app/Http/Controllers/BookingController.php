@@ -179,4 +179,16 @@ class BookingController extends Controller
         return redirect()->back()
             ->with('success', 'Booking berhasil ditolak.');
     }
+
+    /**
+     * Download booking document
+     */
+    public function downloadDocument(Booking $booking)
+    {
+        if (!$booking->dokumen) {
+            return redirect()->back()->with('error', 'Dokumen tidak ditemukan.');
+        }
+
+        return response()->download(storage_path('app/public/' . $booking->dokumen));
+    }
 }

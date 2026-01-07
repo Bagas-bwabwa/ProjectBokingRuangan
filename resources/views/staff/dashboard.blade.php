@@ -1,11 +1,54 @@
 @extends('layouts.staff')
 
 @section('content')
+<!-- Header -->
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h3 class="mb-0">Dashboard Staff - Booking Pending</h3>
+    </div>
+</div>
+
+<!-- Quick Stats Cards -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6 class="text-muted mb-2">Total Pending</h6>
+                <h3 class="text-warning mb-0">{{ $pendingBookings->total() }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6 class="text-muted mb-2">Halaman Aktual</h6>
+                <h3 class="text-primary mb-0">{{ $pendingBookings->currentPage() }} / {{ $pendingBookings->lastPage() }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <a href="{{ route('staff.bookings.index') }}" class="card shadow-sm text-decoration-none text-dark">
+            <div class="card-body">
+                <h6 class="text-muted mb-2">Lihat Semua</h6>
+                <h3 class="text-secondary mb-0">Booking</h3>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6 class="text-muted mb-2">Akses Laporan</h6>
+                <h3 class="text-info mb-0">Lengkap</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
         <div class="col">
             <div class="card shadow">
                 <div class="card-header border-0">
-                    <h3 class="mb-0">Dashboard Staff - Booking Pending</h3>
+                    <h5 class="mb-0">Daftar Booking Pending</h5>
                 </div>
                 <div class="card-body">
                     @if($pendingBookings->count() > 0)
@@ -37,8 +80,9 @@
                             </div>
                             @endforeach
                         </div>
-                        <div class="mt-4">
-                            {{ $pendingBookings->links() }}
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-center mt-5">
+                            {{ $pendingBookings->links('pagination::bootstrap-4') }}
                         </div>
                     @else
                         <div class="alert alert-info">

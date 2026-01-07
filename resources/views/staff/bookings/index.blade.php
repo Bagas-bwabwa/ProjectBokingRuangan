@@ -68,8 +68,9 @@
                             </div>
                             @endforeach
                         </div>
-                        <div class="mt-4">
-                            {{ $bookings->links() }}
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-center mt-5">
+                            {{ $bookings->links('pagination::bootstrap-4') }}
                         </div>
                     @else
                         <div class="alert alert-info">

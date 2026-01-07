@@ -53,6 +53,45 @@
                         <i class="ni ni-calendar-grid-58 text-success"></i> Booking
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('staff.reports.*') ? 'active' : '' }}" href="#navbar-reports" data-toggle="collapse" role="button" aria-expanded="{{ request()->routeIs('staff.reports.*') ? 'true' : 'false' }}" aria-controls="navbar-reports">
+                        <i class="ni ni-chart-bar-32 text-warning"></i> Laporan
+                    </a>
+                    <div class="collapse {{ request()->routeIs('staff.reports.*') ? 'show' : '' }}" id="navbar-reports">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('staff.reports.statistics') ? 'active' : '' }}" href="{{ route('staff.reports.statistics') }}">
+                                    📊 Statistik Utama
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('staff.reports.daily') ? 'active' : '' }}" href="{{ route('staff.reports.daily') }}">
+                                    📅 Laporan Harian
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('staff.reports.monthly') ? 'active' : '' }}" href="{{ route('staff.reports.monthly') }}">
+                                    📆 Laporan Bulanan
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('staff.reports.occupancy') ? 'active' : '' }}" href="{{ route('staff.reports.occupancy') }}">
+                                    🏢 Penggunaan Ruangan
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('staff.reports.approval') ? 'active' : '' }}" href="{{ route('staff.reports.approval') }}">
+                                    ✅ Tingkat Persetujuan
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('staff.reports.top-users') ? 'active' : '' }}" href="{{ route('staff.reports.top-users') }}">
+                                    👥 Pengguna Aktif
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
             <hr class="my-3">
             <ul class="navbar-nav mb-md-3">

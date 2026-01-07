@@ -30,6 +30,19 @@
                         </dd>
                         <dt class="col-sm-3">Keperluan</dt>
                         <dd class="col-sm-9">{{ $booking->keperluan ?? '-' }}</dd>
+                        <dt class="col-sm-3">Dokumen Pendukung</dt>
+                        <dd class="col-sm-9">
+                            @if($booking->dokumen)
+                                <div class="alert alert-info mb-0">
+                                    <i class="fas fa-file-pdf"></i> Dokumen tersedia
+                                    <a href="{{ route('staff.bookings.download-document', $booking) }}" class="btn btn-sm btn-primary ml-2">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            @else
+                                <span class="text-muted">-</span>
+                            @endif
+                        </dd>
                         @if($booking->catatan)
                         <dt class="col-sm-3">Catatan</dt>
                         <dd class="col-sm-9">{{ $booking->catatan }}</dd>
